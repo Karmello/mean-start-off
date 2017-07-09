@@ -2,6 +2,6 @@
 
 1. Run with:
 
-	- "run app"
-	- "run test -unit"
-	- "run test -e2e"
+	- run app
+	- run test -unit
+	- run test -e2e
