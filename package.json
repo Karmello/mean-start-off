@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm i -g gulp-cli node-gyp karma-cli jshint nodemon",
+    "preinstall": "npm i -g gulp-cli node-gyp karma-cli jshint nodemon mocha",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,6 +32,7 @@
     "angular-mocks": "^1.6.5",
     "babel-preset-es2015": "^6.24.1",
     "browser-sync": "^2.18.12",
+    "chai": "^4.0.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^6.1.2",
