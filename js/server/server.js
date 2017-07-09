@@ -1,7 +1,11 @@
 // jshint esversion: 6
 
+global.paths = { root: __dirname };
+
 const r = require('./requires');
 const app = r.express();
+
+global.app = app;
 
 app.use(r.morgan('dev'));
 app.use(r.bodyParser.urlencoded({ extended: true }));
@@ -16,16 +20,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', function(req, res, next) {
+require('./setups/setupRoutes')(() => {
+	require('./setups/setupDb')(() => {
 
-	res.sendFile(r.path.resolve(__dirname, './../../templates/index.html'));
+		r.http.createServer(app).listen(8080);
+	});
 });
-
-app.use('/node_modules', r.express.static(r.path.resolve(__dirname, './../../node_modules')));
-app.use('/public', r.express.static(r.path.resolve(__dirname, './../../public')));
-
-var dbPromise = r.mongoose.createConnection('mongodb://127.0.0.1:27017/test');
-dbPromise.once('open', function() { console.log('connected to MongoDb'); });
-
-const server = r.http.createServer(app);
-server.listen(8080);
