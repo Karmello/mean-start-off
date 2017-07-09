@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Karmello/mean-start-off#readme",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.5",
     "angular": "^1.6.5",
     "express": "^4.15.3",
     "mongoose": "^4.11.1"
