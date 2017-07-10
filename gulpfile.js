@@ -1,20 +1,41 @@
-var r = {
+// jshint esversion: 6, loopfunc: true
+
+const r = {
     autoprefixer : require('gulp-autoprefixer'),
     babel: require('gulp-babel'),
     browserSync: require('browser-sync').create(),
     cleanCss: require('gulp-clean-css'),
     concat: require('gulp-concat'),
+    del: require('del'),
     gulp: require('gulp'),
     util: require('gulp-util'),
     ngAnnotate: require('gulp-ng-annotate'),
     rename: require('gulp-rename'),
+    runSequence: require('run-sequence'),
     sass: require('gulp-sass'),
+    template: require('gulp-template'),
     uglify: require('gulp-uglify')
 };
 
 
 
-r.gulp.task('compile', ['page_templates', 'directive_templates', 'client_js', 'styles']);
+r.gulp.task('browserSync', function() {
+
+    r.browserSync.init({
+        snippetOptions: { ignorePaths: 'public/templates/*.html' },
+        proxy: 'http://localhost:8080',
+        ghostMode: false,
+        browser: 'chrome'
+    });
+});
+
+r.gulp.task('compile', ['page_templates', 'directive_templates', 'client_js', 'styles'], function() {
+
+    r.gulp.watch('templates/*.html', ['page_templates']);
+    r.gulp.watch('directives/**/*.html', ['directive_templates']);
+    r.gulp.watch(['styles/**/*.scss', '!styles/appStyles.scss', 'directives/**/*.scss'], ['styles']);
+    r.gulp.watch(['js/client/**/*.js', 'directives/**/*.js'], ['client_js']);
+});
 
 r.gulp.task('page_templates', function() {
 
@@ -57,17 +78,38 @@ r.gulp.task('styles', function() {
         .pipe(r.browserSync.stream());
 });
 
-r.gulp.task('fireup', ['compile'], function() {
+r.gulp.task('cr', () => {
 
-    r.gulp.watch('templates/*.html', ['page_templates']);
-    r.gulp.watch('directives/**/*.html', ['directive_templates']);
-    r.gulp.watch(['styles/**/*.scss', '!styles/appStyles.scss', 'directives/**/*.scss'], ['styles']);
-    r.gulp.watch(['js/client/**/*.js', 'directives/**/*.js'], ['client_js']);
+    var what = process.argv[3].substring(2, process.argv[3].length);
+    var name = process.argv[4].substring(2, process.argv[4].length);
 
-    r.browserSync.init({
-        snippetOptions: { ignorePaths: 'public/templates/*.html' },
-        proxy: 'http://localhost:8080',
-        ghostMode: false,
-        browser: 'chrome'
-    });
+    var extensions = ['.html', '.scss', '.js'];
+
+    switch (what) {
+
+        case 'dv':
+
+            for (var ext of extensions) {
+                r.gulp.src('utils/myDirective/myDirective' + ext)
+                    .pipe(r.rename(name + ext))
+                    .pipe(r.template({ name: name }))
+                    .pipe(r.gulp.dest('directives/' + name));
+            }
+
+            break;
+    }
+});
+
+r.gulp.task('rm', () => {
+
+    var what = process.argv[3].substring(2, process.argv[3].length);
+    var name = process.argv[4].substring(2, process.argv[4].length);
+
+    switch (what) {
+
+        case 'dv':
+
+            r.del(['directives/' + name, 'public/templates/' + name + '.html']);
+            break;
+    }
 });
