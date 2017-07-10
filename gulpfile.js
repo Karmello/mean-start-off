@@ -17,9 +17,12 @@ const r = {
     uglify: require('gulp-uglify')
 };
 
+r.gulp.task('compile', ['page_templates', 'directive_templates', 'client_js', 'styles'], function() {
 
-
-r.gulp.task('browserSync', function() {
+    r.gulp.watch('templates/*.html', ['page_templates']);
+    r.gulp.watch('directives/**/*.html', ['directive_templates']);
+    r.gulp.watch(['styles/**/*.scss', '!styles/appStyles.scss', 'directives/**/*.scss'], ['styles']);
+    r.gulp.watch(['js/client/**/*.js', 'directives/**/*.js'], ['client_js']);
 
     r.browserSync.init({
         snippetOptions: { ignorePaths: 'public/templates/*.html' },
@@ -27,14 +30,6 @@ r.gulp.task('browserSync', function() {
         ghostMode: false,
         browser: 'chrome'
     });
-});
-
-r.gulp.task('compile', ['page_templates', 'directive_templates', 'client_js', 'styles'], function() {
-
-    r.gulp.watch('templates/*.html', ['page_templates']);
-    r.gulp.watch('directives/**/*.html', ['directive_templates']);
-    r.gulp.watch(['styles/**/*.scss', '!styles/appStyles.scss', 'directives/**/*.scss'], ['styles']);
-    r.gulp.watch(['js/client/**/*.js', 'directives/**/*.js'], ['client_js']);
 });
 
 r.gulp.task('page_templates', function() {
