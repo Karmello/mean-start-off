@@ -15,3 +15,8 @@
 	- run app
 	- run test -unit
 	- run test -e2e
+
+4. Directives:
+
+	- gulp cr --dv --name
+	- gulp rm --dv --name
