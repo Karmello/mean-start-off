@@ -20,3 +20,7 @@
 
 	- gulp cr --dv --name
 	- gulp rm --dv --name
+
+5. Precautions:
+
+	- .env sensitive data must be kept out of repo
