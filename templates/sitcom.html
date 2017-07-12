@@ -1,0 +1,24 @@
+<div id="sitcom">
+	<div id="infoSection">
+		<div>
+			<p>
+				<span class="title">{{ sitcom.header }}</span>
+				<span>({{ sitcom.year }})</span>
+			</p>
+			<p>
+				Stars:
+				<span ng-repeat="star in sitcom.stars">
+					{{ star }}<span ng-if="!$last">,</span>
+				</span>
+			</p>
+		</div>
+		<div>
+			<p>Reviews: {{ sitcom.reviews }}</p>
+			<p>Comments: {{ sitcom.comments }}</p>
+		</div>
+	</div>
+	<div id="aboutSection">
+		<hr>
+		<p>{{ sitcom.description }}</p>
+	</div>
+</div>

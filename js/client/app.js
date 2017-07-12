@@ -6,19 +6,26 @@
 
 		$locationProvider.html5Mode(false).hashPrefix('');
 
-		$stateProvider.state('sitcom', {
-			url: '/sitcom/:id',
+		$stateProvider.state('app', {
+			url: '/',
 			resolve: {
 				getSitcom: function(SitcomsRest, $stateParams) {
 
 					return SitcomsRest.getList();
 				}
-			},
-			onEnter: function() {},
-			onExit: function() {}
+			}
 		});
 
-		$urlRouterProvider.otherwise('/sitcom/1');
+		$stateProvider.state('app.sitcom', {
+			url: 'sitcom/:id',
+			templateUrl:  'public/templates/sitcom.html',
+			controller: function($rootScope, $scope, $stateParams) {
+
+				$scope.sitcom = _.find($rootScope.sitcoms, { _id: $stateParams.id });
+			}
+		});
+
+		$urlRouterProvider.otherwise('/');
 	});
 
 	appModule.run(function($rootScope, Restangular) {
@@ -35,7 +42,7 @@
 
 				if (operation == 'getList') {
 
-
+					$rootScope.sitcoms = data;
 				}
 			}
 

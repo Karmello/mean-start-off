@@ -1,3 +1,33 @@
 body {
 
+	padding: 25px 50px 25px 50px;
+	font-weight: bold;
+
+	#sitcom {
+
+		margin-top: 25px;
+
+		#infoSection {
+
+			display: flex;
+			flex-flow: row wrap;
+
+			p {
+				margin: 0px;
+			}
+
+			span.title {
+				font-size: 30px;
+			}
+
+			> div:first-child {
+				flex-grow: 1;
+				padding-bottom: 15px;
+			}
+		}
+
+		#aboutSection {
+
+		}
+	}
 }
