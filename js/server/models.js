@@ -1,5 +1,5 @@
 var path = global.paths.root + '/schemas';
 
 module.exports = {
-	Sitcom: require(path + '/SitcomSchema')
+	Entity: require(path + '/EntitySchema')
 };

@@ -1,3 +1,3 @@
 module.exports = {
-	'/sitcoms': require(global.paths.root + '/controllers/SitcomController')
+	'/entities': require(global.paths.root + '/controllers/EntityController')
 };

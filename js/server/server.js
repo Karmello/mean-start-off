@@ -2,6 +2,7 @@
 
 global.paths = { root: __dirname };
 
+require('dotenv').config();
 const r = require('./requires');
 const app = r.express();
 
@@ -23,6 +24,6 @@ app.use(function (req, res, next) {
 require('./setups/setupRoutes')(() => {
 	require('./setups/setupDb')(() => {
 
-		r.http.createServer(app).listen(8080);
+		r.http.createServer(app).listen(process.env.PORT);
 	});
 });

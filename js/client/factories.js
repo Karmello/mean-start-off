@@ -2,9 +2,9 @@
 
 	var module = angular.module('appModule');
 
-	module.factory('SitcomsRest', ['Restangular', function(Restangular) {
+	module.factory('MyFactory', [function() {
 
-		return Restangular.service('sitcoms');
+		return {};
 	}]);
 
 })();

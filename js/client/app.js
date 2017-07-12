@@ -8,21 +8,7 @@
 
 		$stateProvider.state('app', {
 			url: '/',
-			resolve: {
-				getSitcom: function(SitcomsRest, $stateParams) {
-
-					return SitcomsRest.getList();
-				}
-			}
-		});
-
-		$stateProvider.state('app.sitcom', {
-			url: 'sitcom/:id',
-			templateUrl:  'public/templates/sitcom.html',
-			controller: function($rootScope, $scope, $stateParams) {
-
-				$scope.sitcom = _.find($rootScope.sitcoms, { _id: $stateParams.id });
-			}
+			resolve: {}
 		});
 
 		$urlRouterProvider.otherwise('/');
@@ -37,14 +23,6 @@
 		Restangular.setRestangularFields({ id: '_id' });
 
 		Restangular.addResponseInterceptor(function(data, operation, what, url, res, deferred) {
-
-			if (what == 'sitcoms') {
-
-				if (operation == 'getList') {
-
-					$rootScope.sitcoms = data;
-				}
-			}
 
 			return data;
 		});

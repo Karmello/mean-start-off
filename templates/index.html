@@ -9,16 +9,11 @@
 		<title>mean-start-off</title>
 		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
 		<link rel="stylesheet" href="./public/unminified/appStyles.css" />
+		<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
 	</head>
 	<body ng-controller="AppController">
-
-		<span ng-repeat="sitcom in sitcoms">
-			<a ui-sref="app.sitcom({ id: sitcom._id })">{{ sitcom.label }}</a>
-			<span ng-if="!$last">|</span>
-		</span>
-
-		<ui-view></ui-view>
-
+		<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="./node_modules/angular/angular.js"></script>
 		<script src="./node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
 		<script src="./node_modules/lodash/lodash.min.js"></script>
